@@ -1,0 +1,12 @@
+.sidebar {
+  width: 250px;
+}
+
+.navbar .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+.logo-div img {
+  border: 3px solid white;
+}

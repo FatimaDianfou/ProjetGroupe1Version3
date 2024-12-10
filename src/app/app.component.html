@@ -1,18 +1,19 @@
 <div class="d-flex">
-  <!-- Sidebar -->
-  <app-sidebar></app-sidebar>
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+    
+    <!-- Main Content -->
+    <div class="main-content flex-grow-1 d-flex flex-column">
+      <!-- Navbar -->
+      <app-navbar></app-navbar>
   
-  <!-- Main Content -->
-  <div class="main-content flex-grow-1 d-flex flex-column">
-    <!-- Navbar -->
-    <app-navbar></app-navbar>
-    
-    <!-- Page Content -->
-    <div class="content-container flex-grow-1 d-flex align-items-center justify-content-center">
-      <router-outlet></router-outlet>
+      
+      <!-- Page Content -->
+      <div class="content-container flex-grow-1 d-flex align-items-center justify-content-center">
+        <router-outlet></router-outlet>
+      </div>
+      
+      <!-- Footer -->
+      <app-footer></app-footer>
     </div>
-    
-    <!-- Footer -->
-    <app-footer></app-footer>
   </div>
-</div>
