@@ -12,6 +12,7 @@ body, html {
   top: 0;
   left: 0;
   width: 100%;
+  height: 60px; ;
   background-color: #004080; /* Bleu foncé */
   color: white;
   display: flex;

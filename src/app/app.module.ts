@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +14,12 @@ import { ResponsableComponent } from './responsable/responsable.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-
+import { RegisterComponent } from './register/register.component';
+import { FormsModule } from '@angular/forms';
+import { AboutComponent } from './about/about.component';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConnexionComponent } from './connexion/connexion.component';
 
 @NgModule({
   declarations: [
@@ -28,14 +33,21 @@ import { LoginComponent } from './login/login.component';
     SidebarComponent,
     ResponsableComponent,
     UserComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    AboutComponent,
+    ConnexionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    CommonModule,
+    BrowserAnimationsModule
   ],
   providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Correct import
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

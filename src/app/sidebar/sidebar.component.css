@@ -1,66 +1,38 @@
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 60px; /* Sous la navbar */
-  left: 0;
-  width: 170px;
-  height: calc(100vh - 60px); /* Prend tout l'espace en dessous de la navbar */
-  background-color: #004080; /* Bleu foncé */
-  color: white;
-  padding: 20px;
+.container {
   display: flex;
-  flex-direction: column;
+  height: 100vh;
 }
-
-.sidebar .nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar .nav-item {
-  margin: 15px 0;
-}
-
-.sidebar .nav-item a {
-  text-decoration: none;
-  color: white;
-  font-size: 18px;
-  padding: 10px 15px;
+.sidenav-container {
   display: flex;
+  height: 100%;
+}
+.logo {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  padding: 20px;
 }
-
-.sidebar .nav-item a i {
+.logo img {
+  width: 40px;
+  height: 40px;
   margin-right: 10px;
 }
-
-.sidebar .nav-item a:hover {
-  background-color: #0056b3; /* Couleur au survol */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
 }
-
-/* Contenu principal */
-.main-content {
-  margin-left: 250px; /* Décalage pour la largeur de la sidebar */
-  padding: 80px 20px; /* Inclut un espace sous la navbar */
-  background-color: #f8f9fa;
-  min-height: 100vh;
+.charts {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
 }
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .sidebar {
-    width: 200px;
-  }
-
-  .main-content {
-    margin-left: 200px;
-  }
-
-  .navbar .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+.pie-charts {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+canvas {
+  max-width: 100%;
 }
