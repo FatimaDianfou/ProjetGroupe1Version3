@@ -1,12 +1,18 @@
-.sidebar {
-  width: 250px;
+.container {
+  max-width: 500px;
+  margin: 50px auto;
 }
 
-.navbar .dropdown-menu {
-  right: 0;
-  left: auto;
+.card {
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
-.logo-div img {
-  border: 3px solid white;
+h2 {
+  font-size: 1.5rem;
+}
+
+.btn {
+  font-size: 16px;
 }

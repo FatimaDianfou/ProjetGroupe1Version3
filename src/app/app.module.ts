@@ -18,8 +18,8 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ConnexionComponent } from './connexion/connexion.component';
+import { StatistiqueComponent } from './statistique/statistique.component';
+
 
 @NgModule({
   declarations: [
@@ -36,15 +36,14 @@ import { ConnexionComponent } from './connexion/connexion.component';
     LoginComponent,
     RegisterComponent,
     AboutComponent,
-    ConnexionComponent
+    StatistiqueComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CommonModule,
-    BrowserAnimationsModule
+    CommonModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], // Correct import

@@ -9,18 +9,21 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
+import { StatistiqueComponent } from './statistique/statistique.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'enseignants', component: EnseignantsComponent },
-  { path: 'cours', component: CoursComponent },
+  { path: 'cours', component: CoursComponent },  // Assurez-vous que cette route est définie
+  { path: '', redirectTo: '/cours', pathMatch: 'full' },
   { path: 'etudiant', component: EtudiantComponent },
   { path: 'responsable', component: ResponsableComponent },
   { path: 'user', component: UserComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'about', component: AboutComponent }
+  { path: 'about', component: AboutComponent },
+  { path: ' statistique', component:  StatistiqueComponent } 
 ];
 
 @NgModule({

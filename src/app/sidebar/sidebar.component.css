@@ -1,38 +1,26 @@
-.container {
-  display: flex;
-  height: 100vh;
+/* Sidebar */
+.sidebar {
+  background-color: #2980B9; /* Même bleu que la navbar */
+  color: white; /* Texte en blanc */
+  width: 250px;
+  height: 100vh; /* Prendre toute la hauteur */
+  position: fixed; /* Fixer la sidebar */
+  top: 0;
+  left: 0;
+  padding-top: 20px;
 }
-.sidenav-container {
-  display: flex;
-  height: 100%;
+
+.sidebar .nav-item {
+  padding: 15px 20px;
 }
-.logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+
+.sidebar .nav-item a {
+  color: white; /* Couleur des liens en blanc */
+  text-decoration: none;
+  font-size: 18px;
 }
-.logo img {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-}
-.charts {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-}
-.pie-charts {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-canvas {
-  max-width: 100%;
+
+.sidebar .nav-item a:hover {
+  background-color: #3498db; /* Bleu foncé au survol */
+  border-radius: 5px; /* Arrondir les coins */
 }

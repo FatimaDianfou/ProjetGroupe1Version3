@@ -13,7 +13,7 @@ body, html {
   left: 0;
   width: 100%;
   height: 60px; ;
-  background-color: #004080; /* Bleu foncé */
+  background-color: #3498db; /* Bleu foncé au survol */
   color: white;
   display: flex;
   justify-content: space-between;
