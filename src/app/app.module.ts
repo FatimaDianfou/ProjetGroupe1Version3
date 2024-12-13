@@ -11,7 +11,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ResponsableComponent } from './responsable/responsable.component';
-import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -32,7 +31,6 @@ import { StatistiqueComponent } from './statistique/statistique.component';
     FooterComponent,
     SidebarComponent,
     ResponsableComponent,
-    UserComponent,
     LoginComponent,
     RegisterComponent,
     AboutComponent,

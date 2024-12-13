@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,46 +12,22 @@ export class LoginComponent {
   errorMessage: string = '';
   successMessage: string = '';
 
-  // Pour l'enregistrement
-  registerEmail: string = '';
-  registerPassword: string = '';
-  registerErrorMessage: string = '';
+  constructor(private router: Router) {}
 
-  constructor() {}
-
-  // Vérification du login
   login() {
-    const users = JSON.parse(localStorage.getItem('users') || '[]'); // Récupérer les utilisateurs enregistrés
-    const user = users.find((u: any) => u.email === this.email && u.password === this.password);
+    // Récupérer les informations depuis le localStorage
+    const storedEmail = localStorage.getItem('userEmail');
+    const storedPassword = localStorage.getItem('userPassword');
 
-    if (user) {
-      this.successMessage = 'Connexion réussie ! Bienvenue !';
+    if (this.email === storedEmail && this.password === storedPassword) {
+      this.successMessage = 'Connexion réussie !';
       this.errorMessage = '';
+
+      // Redirection vers la page d'accueil après la connexion
+      this.router.navigate(['/home']);
     } else {
-      this.errorMessage = 'Email ou mot de passe incorrect.';
+      this.errorMessage = 'Identifiants incorrects.';
       this.successMessage = '';
-    }
-  }
-
-  // Création d'un compte
-  register() {
-    if (!this.registerEmail || !this.registerPassword) {
-      this.registerErrorMessage = 'Veuillez remplir tous les champs pour créer un compte.';
-      return;
-    }
-
-    const users = JSON.parse(localStorage.getItem('users') || '[]'); // Récupérer les utilisateurs existants
-    const existingUser = users.find((u: any) => u.email === this.registerEmail);
-
-    if (existingUser) {
-      this.registerErrorMessage = 'Cet email est déjà utilisé.';
-    } else {
-      users.push({ email: this.registerEmail, password: this.registerPassword });
-      localStorage.setItem('users', JSON.stringify(users)); // Sauvegarde dans localStorage
-      this.registerErrorMessage = '';
-      alert('Compte créé avec succès ! Vous pouvez maintenant vous connecter.');
-      this.registerEmail = '';
-      this.registerPassword = '';
     }
   }
 }

@@ -9,40 +9,31 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
   nom: string = '';
   prenom: string = '';
-  dateNaissance: string = '';
-  adresse: string = '';
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
+  errorMessage: string = '';
+  successMessage: string = '';
 
   constructor(private router: Router) {}
 
   register() {
     if (this.password !== this.confirmPassword) {
-      alert("Les mots de passe ne correspondent pas.");
+      this.errorMessage = 'Les mots de passe ne correspondent pas.';
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const existingUser = users.find((u: any) => u.email === this.email);
+    // Sauvegarde dans le localStorage
+    localStorage.setItem('userEmail', this.email);
+    localStorage.setItem('userPassword', this.password);
 
-    if (existingUser) {
-      alert("Cet email est déjà utilisé.");
-    } else {
-      const newUser = {
-        nom: this.nom,
-        prenom: this.prenom,
-        dateNaissance: this.dateNaissance,
-        adresse: this.adresse,
-        email: this.email,
-        password: this.password
-      };
+    // Message de succès
+    this.successMessage = 'Inscription réussie !';
+    this.errorMessage = '';
 
-      users.push(newUser);
-      localStorage.setItem('users', JSON.stringify(users));
-
-      alert("Compte créé avec succès ! Vous pouvez maintenant vous connecter.");
+    // Redirection vers la page de connexion après l'inscription
+    setTimeout(() => {
       this.router.navigate(['/login']);
-    }
+    }, 2000);
   }
 }

@@ -1,6 +1,6 @@
 <div class="d-flex">
   <!-- Sidebar -->
-  <div class="sidebar">
+  <div *ngIf="!isLoginPage && !isRegisterPage" class="sidebar">
     <ul class="nav">
       <li class="nav-item">
         <a routerLink="/etudiant"><i class="fas fa-user-graduate"></i> Étudiants</a>
@@ -15,7 +15,7 @@
         <a routerLink="/responsable"><i class="fas fa-user-tie"></i> Responsable</a>
       </li>
       <li class="nav-item">
-        <a routerLink="/ statistique"><i class="fas fa-chart-bar"></i> Statistiques</a>
+        <a routerLink="/statistique"><i class="fas fa-chart-bar"></i> Statistiques</a>
       </li>
     </ul>
   </div>
@@ -23,7 +23,8 @@
   <!-- Main Content -->
   <div class="main-content" style="flex-grow: 1;">
     <!-- Navbar -->
-    <app-navbar></app-navbar>
+    <app-navbar *ngIf="!isLoginPage && !isRegisterPage"></app-navbar> <!-- Masquer la navbar si sur la page login ou register -->
+
     <!-- Page Content -->
     <div class="content-container">
       <router-outlet></router-outlet> <!-- Ceci est l'endroit où le contenu change -->

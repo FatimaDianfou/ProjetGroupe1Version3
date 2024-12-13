@@ -33,3 +33,7 @@
   margin-left: 250px; /* Décaler le contenu principal à droite de la sidebar */
   padding: 20px;
 }
+/* main.component.css */
+.main-content {
+  margin-top: 20px; /* Ajoute un espace de 20px entre la navbar et le contenu */
+}
