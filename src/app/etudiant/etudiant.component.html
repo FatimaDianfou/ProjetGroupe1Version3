@@ -1,1 +1,49 @@
-<p>etudiant works!</p>
+<div class="container">
+    <h2>Gestion des Étudiants</h2>
+
+    <!-- Formulaire -->
+    <form (ngSubmit)="ajouterOuModifierEtudiant()" #etudiantForm="ngForm">
+      <div>
+        <label>Nom :</label>
+        <input type="text" [(ngModel)]="etudiant.nom" name="nom" required #nom="ngModel" />
+        <div *ngIf="nom.invalid && nom.touched" class="error-message">
+          Le nom est requis.
+        </div>
+      </div>
+      <div>
+        <label>Prénom :</label>
+        <input type="text" [(ngModel)]="etudiant.prenom" name="prenom" required #prenom="ngModel" />
+        <div *ngIf="prenom.invalid && prenom.touched" class="error-message">
+          Le prénom est requis.
+        </div>
+      </div>
+      <div>
+        <label>Email :</label>
+        <input type="email" [(ngModel)]="etudiant.email" name="email" required email #email="ngModel" />
+        <div *ngIf="email.invalid && email.touched" class="error-message">
+          L'email est requis et doit être valide.
+        </div>
+      </div>
+      <div>
+        <label>Classe :</label>
+        <input type="text" [(ngModel)]="etudiant.classe" name="classe" required #classe="ngModel" />
+        <div *ngIf="classe.invalid && classe.touched" class="error-message">
+          La classe est requise.
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="etudiantForm.invalid">
+        {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+      </button>
+      <button type="button" (click)="reinitialiserFormulaire()">Réinitialiser</button>
+    </form>
+
+    <!-- Liste des étudiants -->
+    <ul>
+      <li *ngFor="let etudiant of etudiants">
+        {{ etudiant.nom }} {{ etudiant.prenom }} - {{ etudiant.email }} ({{ etudiant.classe }})
+        <button (click)="modifierEtudiant(etudiant)">Modifier</button>
+        <button (click)="supprimerEtudiant(etudiant.id)">Supprimer</button>
+      </li>
+    </ul>
+</div>
