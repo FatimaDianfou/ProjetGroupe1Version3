@@ -14,9 +14,11 @@ interface Etudiant {
   styleUrls: ['./etudiant.component.css']
 })
 export class EtudiantComponent implements OnInit {
-  etudiants: Etudiant[] = [];
-  etudiant: Etudiant = { id: 0, nom: '', prenom: '', email: '', classe: '' };  // Change to 'etudiant' for each individual field
-  isEditMode: boolean = false;
+  searchText: string = ''; // Texte de recherche
+  popupVisible: boolean = false; // Indique si la popup est visible
+  isEditMode: boolean = false; // Mode édition ou ajout
+  etudiants: Etudiant[] = []; // Liste des étudiants
+  etudiant: Etudiant = { id: 0, nom: '', prenom: '', email: '', classe: '' }; // Étudiant en cours d'ajout/modification
 
   constructor() {}
 
@@ -26,6 +28,17 @@ export class EtudiantComponent implements OnInit {
       { id: 1, nom: 'Diallo', prenom: 'Fatima', email: 'fatima.diallo@gmail.com', classe: 'Terminale' },
       { id: 2, nom: 'Baldé', prenom: 'Mamadou', email: 'mamadou.balde@gmail.com', classe: 'Première' }
     ];
+  }
+
+  // Ouvrir la popup
+  ouvrirPopup(): void {
+    this.reinitialiserFormulaire(); // Réinitialiser le formulaire avant ouverture
+    this.popupVisible = true;
+  }
+
+  // Fermer la popup
+  fermerPopup(): void {
+    this.popupVisible = false;
   }
 
   // Ajouter ou Modifier un étudiant
@@ -42,6 +55,7 @@ export class EtudiantComponent implements OnInit {
         this.etudiants.push({ ...this.etudiant });
       }
       this.reinitialiserFormulaire();
+      this.fermerPopup(); // Fermer la popup après soumission
     }
   }
 
@@ -55,10 +69,23 @@ export class EtudiantComponent implements OnInit {
   modifierEtudiant(etudiant: Etudiant): void {
     this.etudiant = { ...etudiant };
     this.isEditMode = true;
+    this.popupVisible = true; // Ouvrir la popup en mode édition
   }
 
   // Supprimer un étudiant
   supprimerEtudiant(id: number): void {
     this.etudiants = this.etudiants.filter(etudiant => etudiant.id !== id);
+  }
+
+  // Filtrer les étudiants selon la recherche
+  get etudiantsFiltres(): Etudiant[] {
+    if (!this.searchText.trim()) {
+      return this.etudiants; // Retourner tous les étudiants si la recherche est vide
+    }
+    return this.etudiants.filter(etudiant =>
+      `${etudiant.nom} ${etudiant.prenom} ${etudiant.email} ${etudiant.classe}`
+        .toLowerCase()
+        .includes(this.searchText.toLowerCase())
+    );
   }
 }

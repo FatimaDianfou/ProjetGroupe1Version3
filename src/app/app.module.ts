@@ -1,6 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -18,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 import { CommonModule } from '@angular/common';
 import { StatistiqueComponent } from './statistique/statistique.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { NotesComponent } from './notes/notes.component';
 
 
 @NgModule({
@@ -34,7 +35,9 @@ import { StatistiqueComponent } from './statistique/statistique.component';
     LoginComponent,
     RegisterComponent,
     AboutComponent,
-    StatistiqueComponent
+    StatistiqueComponent,
+    ForgotPasswordComponent,
+    NotesComponent
   ],
   imports: [
     BrowserModule,

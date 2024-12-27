@@ -1,77 +1,94 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-cours',
   templateUrl: './cours.component.html',
   styleUrls: ['./cours.component.css']
 })
-export class CoursComponent implements OnInit {
-  newCours: string = '';
-  coursList: { id: number, name: string }[] = [];
+export class CoursComponent {
+getEtudiantNameById(_t31: any) {
+throw new Error('Method not implemented.');
+}
+isLastEtudiant(arg0: any,_t31: any) {
+throw new Error('Method not implemented.');
+}
+  // Liste des cours
+  coursList = [
+    { id: 1, matiere: 'Mathématiques', nombreHeures: 30 },
+    { id: 2, matiere: 'Physique', nombreHeures: 25 },
+    { id: 3, matiere: 'Chimie', nombreHeures: 20 }
+  ];
 
-  // Pour gérer l'édition
-  editingCoursId: number | null = null;
-  editingCoursName: string = '';
+  filteredCoursList = [...this.coursList]; // Liste filtrée pour la recherche
 
-  constructor() { }
+  // États pour ajouter/modifier un cours
+  newCours = { id: 0, matiere: '', nombreHeures: 0 };
+  showAddCoursForm = false;
 
-  ngOnInit(): void {
-    // Charger les cours depuis le localStorage
-    this.loadCours();
+  editingCoursId: number | null = null; // ID du cours en cours de modification
+  editingCours = { matiere: '', nombreHeures: 0 };
+
+  searchTerm: string = ''; // Terme de recherche
+etudiantsList: any;
+
+  // Fonction pour ouvrir/fermer le formulaire d'ajout
+  toggleAddCoursForm() {
+    this.showAddCoursForm = !this.showAddCoursForm;
   }
 
-  // Fonction pour charger les cours depuis le localStorage
-  loadCours() {
-    const storedCours = localStorage.getItem('coursList');
-    if (storedCours) {
-      this.coursList = JSON.parse(storedCours);
-      console.log(this.coursList); // Pour vérifier que les données sont correctement récupérées
-    }
+  closeAddCoursForm() {
+    this.showAddCoursForm = false;
+    this.newCours = { id: 0, matiere: '', nombreHeures: 0 };
   }
 
-  // Ajouter un cours
+  // Ajouter un nouveau cours
   addCours() {
-    if (this.newCours.trim()) {
-      const newCoursObj = {
-        id: Date.now(),  // Utilisation de Date.now() pour générer un ID unique
-        name: this.newCours
-      };
-      this.coursList.push(newCoursObj);
-      localStorage.setItem('coursList', JSON.stringify(this.coursList));
-      this.newCours = ''; // Réinitialiser le champ de saisie
+    if (this.newCours.matiere.trim() && this.newCours.nombreHeures > 0) {
+      const newId = this.coursList.length > 0 ? Math.max(...this.coursList.map(c => c.id)) + 1 : 1;
+      this.coursList.push({ ...this.newCours, id: newId });
+      this.filteredCoursList = [...this.coursList]; // Mettre à jour la liste filtrée
+      this.closeAddCoursForm();
     }
+  }
+
+  // Filtrer les cours en fonction de la recherche
+  filterCours() {
+    this.filteredCoursList = this.coursList.filter(c =>
+      c.matiere.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 
   // Modifier un cours
-  editCours(id: number) {
-    const cours = this.coursList.find(c => c.id === id);
+  editCours(coursId: number) {
+    const cours = this.coursList.find(c => c.id === coursId);
     if (cours) {
-      this.editingCoursId = id;
-      this.editingCoursName = cours.name;
+      this.editingCoursId = coursId;
+      this.editingCours = { ...cours }; // Cloner le cours pour éviter les modifications directes
     }
   }
 
-  // Sauvegarder un cours modifié
   saveCours() {
-    if (this.editingCoursId !== null && this.editingCoursName.trim()) {
-      const cours = this.coursList.find(c => c.id === this.editingCoursId);
-      if (cours) {
-        cours.name = this.editingCoursName;
-        localStorage.setItem('coursList', JSON.stringify(this.coursList));
+    if (this.editingCoursId !== null) {
+      const index = this.coursList.findIndex(c => c.id === this.editingCoursId);
+      if (index !== -1) {
+        this.coursList[index] = { id: this.editingCoursId, ...this.editingCours };
+        this.filteredCoursList = [...this.coursList]; // Mettre à jour la liste filtrée
       }
-      this.cancelEdit();  // Revenir à l'état initial
+      this.cancelEdit();
     }
   }
 
-  // Annuler l'édition
   cancelEdit() {
     this.editingCoursId = null;
-    this.editingCoursName = '';
+    this.editingCours = { matiere: '', nombreHeures: 0 };
   }
 
   // Supprimer un cours
-  deleteCours(id: number) {
-    this.coursList = this.coursList.filter(cours => cours.id !== id);
-    localStorage.setItem('coursList', JSON.stringify(this.coursList));
+  deleteCours(coursId: number) {
+    this.coursList = this.coursList.filter(c => c.id !== coursId);
+    this.filteredCoursList = [...this.coursList]; // Mettre à jour la liste filtrée
   }
+
+  
+  
 }

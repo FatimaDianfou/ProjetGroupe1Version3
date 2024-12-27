@@ -1,39 +1,41 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   nom: string = '';
   prenom: string = '';
+  telephone: string = '';
+  adresse: string = '';
   email: string = '';
   password: string = '';
-  confirmPassword: string = '';
-  errorMessage: string = '';
+  role: string = 'directeur';
   successMessage: string = '';
+  errorMessage: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  register() {
-    if (this.password !== this.confirmPassword) {
-      this.errorMessage = 'Les mots de passe ne correspondent pas.';
-      return;
+  createAccount() {
+    const isCreated = this.authService.createAccount(
+      this.email,
+      this.password,
+      this.role
+    );
+
+    if (isCreated) {
+      this.successMessage = 'Compte créé avec succès ! Redirection...';
+      this.errorMessage = '';
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 2000); // Redirection après 2 secondes
+    } else {
+      this.errorMessage = "Un compte avec cet email existe déjà.";
+      this.successMessage = '';
     }
-
-    // Sauvegarde dans le localStorage
-    localStorage.setItem('userEmail', this.email);
-    localStorage.setItem('userPassword', this.password);
-
-    // Message de succès
-    this.successMessage = 'Inscription réussie !';
-    this.errorMessage = '';
-
-    // Redirection vers la page de connexion après l'inscription
-    setTimeout(() => {
-      this.router.navigate(['/login']);
-    }, 2000);
   }
 }

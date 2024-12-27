@@ -37,4 +37,49 @@
     margin-left: 10px;
     background-color: #e74c3c;
   }
-  
+  /* Styling pour les boutons */
+button {
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+button i {
+  margin-right: 5px; /* Espacement entre l'icône et le texte */
+}
+
+/* Styling pour la barre de recherche */
+input.form-control {
+  width: 50%;
+  margin: 20px 0;
+  display: inline-block;
+}
+
+/* Styling pour le tableau */
+table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+th, td {
+  text-align: center;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+.add-cours-modal {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  background: white;
+  z-index: 1050;
+  max-width: 500px;
+  width: 100%;
+}

@@ -9,6 +9,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
 import { StatistiqueComponent } from './statistique/statistique.component';
+import { AdminGuard } from './guards/admin.guard';
+import { NotesComponent } from './notes/notes.component';
+
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },  // Redirection par défaut vers la page de connexion
@@ -21,6 +25,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent },
   { path: 'statistique', component: StatistiqueComponent },
+  { path: 'notes', component: NotesComponent },
+  { path: 'creer-compte', component: RegisterComponent, canActivate: [AdminGuard] },
   // En cas de route invalide, redirige vers la page de connexion
   { path: '**', redirectTo: '/login' }
 ];

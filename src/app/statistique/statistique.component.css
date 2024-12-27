@@ -1,0 +1,79 @@
+/* Conteneur global pour la section */
+.statistiques-container {
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style pour le titre */
+  .title {
+    font-size: 2rem;
+    color: #2d3e50;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Liste des effectifs avec un espacement entre les items */
+  .effectifs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Style de chaque élément dans la liste */
+  .effectif-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Mise en valeur du nom de la filière */
+  .filiere-name {
+    font-weight: 600;
+    color: #3f51b5;
+    font-size: 1.1rem;
+  }
+  
+  /* Affichage du nombre d'effectifs */
+  .effectif-number {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  /* Ajout d'un hover pour rendre les éléments interactifs */
+  .effectif-item:hover {
+    background-color: #f0f5ff;
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsivité : Adaptation pour les petits écrans */
+  @media (max-width: 600px) {
+    .statistiques-container {
+      padding: 15px;
+    }
+  
+    .title {
+      font-size: 1.6rem;
+    }
+  
+    .effectif-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .effectif-item .effectif-number {
+      font-size: 1.2rem;
+      margin-top: 5px;
+    }
+  }
+  

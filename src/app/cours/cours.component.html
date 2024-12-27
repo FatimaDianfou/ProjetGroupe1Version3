@@ -1,25 +1,89 @@
-<div>
-    <h2>Liste des Cours</h2>
-    <!-- Liste des cours -->
-    <ul>
-      <li *ngFor="let cours of coursList">
-        {{ cours.name }}
-        <button (click)="editCours(cours.id)">Modifier</button>
-        <button (click)="deleteCours(cours.id)">Supprimer</button>
-      </li>
-    </ul>
-  
-    <!-- Formulaire pour ajouter un nouveau cours -->
-    <div>
-      <input [(ngModel)]="newCours" placeholder="Ajouter un cours" />
-      <button (click)="addCours()">Ajouter</button>
+<div class="container mt-4">
+  <!-- Titre et Bouton Ajouter un cours -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Liste des Cours</h2>
+    <button class="btn btn-primary" (click)="toggleAddCoursForm()">
+      <i class="fas fa-plus-circle"></i> Ajouter un cours
+    </button>
+  </div>
+
+  <!-- Barre de recherche -->
+  <div class="mb-3">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="filterCours()"
+      placeholder="Rechercher un cours..."
+      class="form-control"
+    />
+  </div>
+
+  <!-- Formulaire Ajouter un cours comme une fenêtre en haut -->
+  <div
+    *ngIf="showAddCoursForm"
+    class="modal-backdrop"
+    (click)="closeAddCoursForm()"
+  ></div>
+  <div
+    *ngIf="showAddCoursForm"
+    class="add-cours-modal p-4 shadow rounded"
+  >
+    <h3>Ajouter un nouveau cours</h3>
+    <div class="form-group mb-3">
+      <label>Matière :</label>
+      <input [(ngModel)]="newCours.matiere" type="text" class="form-control" placeholder="Nom du cours" />
     </div>
-  
-    <!-- Formulaire pour modifier un cours -->
-    <div *ngIf="editingCoursId !== null">
-      <input [(ngModel)]="editingCoursName" placeholder="Modifier le nom du cours" />
-      <button (click)="saveCours()">Enregistrer</button>
-      <button (click)="cancelEdit()">Annuler</button>
+    <div class="form-group mb-3">
+      <label>Nombre d'heures :</label>
+      <input [(ngModel)]="newCours.nombreHeures" type="number" class="form-control" placeholder="Nombre d'heures" />
+    </div>
+    <div class="d-flex justify-content-end">
+      <button (click)="addCours()" class="btn btn-primary me-2">Enregistrer</button>
+      <button (click)="closeAddCoursForm()" class="btn btn-secondary">Annuler</button>
     </div>
   </div>
-  
+
+  <!-- Liste des cours -->
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Matière</th>
+        <th>Nombre d'heures</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cours of filteredCoursList">
+        <td>{{ cours.id }}</td>
+        <td>{{ cours.matiere }}</td>
+        <td>{{ cours.nombreHeures }}</td>
+        <td>
+          <!-- Bouton Modifier -->
+          <button (click)="editCours(cours.id)" class="btn btn-success btn-sm me-2">
+            <i class="fas fa-edit" title="Modifier"></i>
+          </button>
+          <!-- Bouton Supprimer -->
+          <button (click)="deleteCours(cours.id)" class="btn btn-danger btn-sm">
+            <i class="fas fa-trash" title="Supprimer"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Formulaire Modifier un cours -->
+  <div *ngIf="editingCoursId !== null" class="mt-4">
+    <h3>Modifier un cours</h3>
+    <div class="form-group mb-3">
+      <label>Matière :</label>
+      <input [(ngModel)]="editingCours.matiere" type="text" class="form-control" placeholder="Nom du cours" />
+    </div>
+    <div class="form-group mb-3">
+      <label>Nombre d'heures :</label>
+      <input [(ngModel)]="editingCours.nombreHeures" type="number" class="form-control" placeholder="Nombre d'heures" />
+    </div>
+    <button (click)="saveCours()" class="btn btn-primary me-2">Enregistrer</button>
+    <button (click)="cancelEdit()" class="btn btn-secondary">Annuler</button>
+  </div>
+</div>

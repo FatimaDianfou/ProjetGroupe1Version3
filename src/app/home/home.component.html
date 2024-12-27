@@ -1,47 +1,47 @@
 <div class="home-container">
-    <div class="banner">
-      <h1>Bienvenue sur Ensitech</h1>
-      <p>La solution complète pour la gestion de votre établissement scolaire.</p>
-    </div>
-  
+  <!-- Bannière d'accueil -->
+  <div class="banner">
+    <h1>Bienvenue sur Ensitech</h1>
+    <p>La solution complète pour la gestion de votre établissement scolaire.</p>
+  </div>
 
-    <div class="stats-section">
-      <h2>Statistiques</h2>
-      <div class="stats">
-        <div class="stat-card">
-          <h3>{{ stats.students }}</h3>
-          <p>Étudiants</p>
-        </div>
-        <div class="stat-card">
-          <h3>{{ stats.courses }}</h3>
-          <p>Cours disponibles</p>
-        </div>
-        <div class="stat-card">
-          <h3>{{ stats.teachers }}</h3>
-          <p>Enseignants</p>
-        </div>
+  <!-- Section des statistiques -->
+  <div class="stats-section">
+    <h2>Statistiques</h2>
+    <div class="stats">
+      <div class="stat-card">
+        <h3>{{ stats.students }}</h3>
+        <p>Étudiants</p>
       </div>
-    </div>
-  
-
-    <div class="announcements-section">
-      <h2>Dernières annonces</h2>
-      <div *ngFor="let announcement of announcements" class="announcement-card">
-        <h3>{{ announcement.title }}</h3>
-        <small>{{ announcement.date }}</small>
-        <p>{{ announcement.message }}</p>
+      <div class="stat-card">
+        <h3>{{ stats.courses }}</h3>
+        <p>Cours disponibles</p>
       </div>
-    </div>
-  
-    
-    <div class="links-section">
-      <h2>Accès rapide</h2>
-      <div class="links">
-        <a routerLink="/cours" class="btn btn-primary mx-3" >Gérer les cours</a>
-        <a routerLink="/etudiants" class="btn btn-primary mx-3">Gérer les étudiants</a>
-        <a routerLink="/connexion" class="btn btn-primary mx-3">Connexion</a>
-        <a routerLink="/creer-compte" class="btn btn-primary">Créer un compte</a>
+      <div class="stat-card">
+        <h3>{{ stats.teachers }}</h3>
+        <p>Enseignants</p>
       </div>
     </div>
   </div>
-  
+
+  <!-- Section des annonces -->
+  <div class="announcements-section">
+    <h2>Dernières annonces</h2>
+    <div *ngFor="let announcement of announcements" class="announcement-card">
+      <h3>{{ announcement.title }}</h3>
+      <small>{{ announcement.date }}</small>
+      <p>{{ announcement.message }}</p>
+    </div>
+  </div>
+
+  <!-- Section des liens rapides -->
+  <div class="links-section">
+    <h2>Accès rapide</h2>
+    <div class="links">
+      <a routerLink="/cours" class="btn btn-primary mx-3">Gérer les cours</a>
+      <a routerLink="/etudiants" class="btn btn-primary mx-3">Gérer les étudiants</a>
+      <a routerLink="/connexion" class="btn btn-primary mx-3">Connexion</a>
+      <a routerLink="/creer-compte" class="btn btn-primary">Créer un compte</a>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-enseignants',
@@ -6,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./enseignants.component.css']
 })
 export class EnseignantsComponent implements OnInit {
-  // Propriétés pour les entrées du formulaire
   nom: string = '';
   prenom: string = '';
   email: string = '';
@@ -14,57 +14,50 @@ export class EnseignantsComponent implements OnInit {
   telephone: string = '';
   adresse: string = '';
   enseignantsList: any[] = [];
+  filteredEnseignants: any[] = [];
+  searchQuery: string = '';
 
-  // Indicateur de modification d'un enseignant
   editEnseignantIndex: number | null = null;
 
   constructor() {
     this.loadEnseignants();
   }
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.filteredEnseignants = [...this.enseignantsList];
   }
 
-  // Charger les enseignants depuis localStorage
   loadEnseignants() {
     const storedEnseignants = localStorage.getItem('enseignantsList');
     if (storedEnseignants) {
       this.enseignantsList = JSON.parse(storedEnseignants);
     }
+    this.filteredEnseignants = [...this.enseignantsList];
   }
 
-  // Ajouter ou mettre à jour un enseignant
   ajouterOuModifierEnseignant() {
-    if (this.nom && this.prenom && this.email && this.specialite && this.telephone) {
-      const newEnseignant = {
-        nom: this.nom,
-        prenom: this.prenom,
-        email: this.email,
-        specialite: this.specialite,
-        telephone: this.telephone,
-        adresse: this.adresse
-      };
+    const newEnseignant = {
+      nom: this.nom,
+      prenom: this.prenom,
+      email: this.email,
+      specialite: this.specialite,
+      telephone: this.telephone,
+      adresse: this.adresse
+    };
 
-      if (this.editEnseignantIndex !== null) {
-        // Mise à jour de l'enseignant existant
-        this.enseignantsList[this.editEnseignantIndex] = newEnseignant;
-        this.editEnseignantIndex = null; // Réinitialiser l'index
-      } else {
-        // Ajout d'un nouvel enseignant
-        this.enseignantsList.push(newEnseignant);
-      }
-
-      // Sauvegarder la liste dans le localStorage
-      localStorage.setItem('enseignantsList', JSON.stringify(this.enseignantsList));
-
-      // Réinitialiser le formulaire après ajout/édition
-      this.resetForm();
+    if (this.editEnseignantIndex !== null) {
+      this.enseignantsList[this.editEnseignantIndex] = newEnseignant;
+      this.editEnseignantIndex = null;
     } else {
-      alert('Veuillez remplir tous les champs obligatoires.');
+      this.enseignantsList.push(newEnseignant);
     }
+
+    localStorage.setItem('enseignantsList', JSON.stringify(this.enseignantsList));
+    this.filteredEnseignants = [...this.enseignantsList];
+    this.resetForm();
+    this.closeFormModal();
   }
 
-  // Éditer un enseignant
   editEnseignant(index: number) {
     const enseignant = this.enseignantsList[index];
     this.nom = enseignant.nom;
@@ -74,17 +67,24 @@ export class EnseignantsComponent implements OnInit {
     this.telephone = enseignant.telephone;
     this.adresse = enseignant.adresse;
     this.editEnseignantIndex = index;
+    this.openFormModal();
   }
 
-  // Supprimer un enseignant
   supprimerEnseignant(index: number) {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet enseignant ?')) {
       this.enseignantsList.splice(index, 1);
       localStorage.setItem('enseignantsList', JSON.stringify(this.enseignantsList));
+      this.filteredEnseignants = [...this.enseignantsList];
     }
   }
 
-  // Réinitialiser le formulaire
+  rechercherEnseignant() {
+    this.filteredEnseignants = this.enseignantsList.filter(enseignant =>
+      enseignant.nom.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      enseignant.email.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+
   resetForm() {
     this.nom = '';
     this.prenom = '';
@@ -92,5 +92,21 @@ export class EnseignantsComponent implements OnInit {
     this.specialite = '';
     this.telephone = '';
     this.adresse = '';
+  }
+
+  openFormModal() {
+    const modal = document.getElementById('enseignantModal');
+    if (modal) {
+      const bootstrapModal = new bootstrap.Modal(modal);
+      bootstrapModal.show();
+    }
+  }
+
+  closeFormModal() {
+    const modal = document.getElementById('enseignantModal');
+    if (modal) {
+      const bootstrapModal = bootstrap.Modal.getInstance(modal);
+      bootstrapModal?.hide();
+    }
   }
 }

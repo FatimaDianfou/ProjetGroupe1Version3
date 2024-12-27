@@ -1,0 +1,95 @@
+<div class="container">
+    <h2>Liste des Notes des Étudiants</h2>
+  
+    <!-- Barre de recherche -->
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Rechercher une note par nom, matière ou classe"
+        [(ngModel)]="searchQuery"
+        (input)="filterNotes()"
+      />
+    </div>
+  
+    <!-- Tableau des notes -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Classe</th>
+          <th>Matière</th>
+          <th>Note</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let note of filteredNotes; let i = index">
+          <td>{{ note.nom }}</td>
+          <td>{{ note.prenom }}</td>
+          <td>{{ note.email }}</td>
+          <td>{{ note.classe }}</td>
+          <td>{{ note.matiere }}</td>
+          <td>{{ note.note }}</td>
+          <td>
+            <!-- Modifier -->
+            <button class="btn btn-warning" (click)="openEditNoteModal(i)">
+              <i class="fa fa-edit"></i> Modifier
+            </button>
+            
+            <!-- Supprimer -->
+            <button class="btn btn-danger" (click)="deleteNote(i)">
+              <i class="fa fa-trash"></i> Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Bouton Ajouter une note -->
+    <button class="btn btn-primary" (click)="openAddNoteModal()">Ajouter une Note</button>
+  
+    <!-- Popup pour ajouter une note -->
+    <div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="addNoteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addNoteModalLabel">Ajouter une Note</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="addNote()">
+              <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nom" [(ngModel)]="newNote.nom" name="nom" required />
+              </div>
+              <div class="mb-3">
+                <label for="prenom" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="prenom" [(ngModel)]="newNote.prenom" name="prenom" required />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" [(ngModel)]="newNote.email" name="email" required />
+              </div>
+              <div class="mb-3">
+                <label for="classe" class="form-label">Classe</label>
+                <input type="text" class="form-control" id="classe" [(ngModel)]="newNote.classe" name="classe" required />
+              </div>
+              <div class="mb-3">
+                <label for="matiere" class="form-label">Matière</label>
+                <input type="text" class="form-control" id="matiere" [(ngModel)]="newNote.matiere" name="matiere" required />
+              </div>
+              <div class="mb-3">
+                <label for="note" class="form-label">Note</label>
+                <input type="number" class="form-control" id="note" [(ngModel)]="newNote.note" name="note" required />
+              </div>
+              <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

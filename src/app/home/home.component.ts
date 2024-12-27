@@ -1,23 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  isAdmin: boolean = false;
   stats = {
-    students: 120,
-    courses: 15,
-    teachers: 10
+    students: 0,
+    courses: 0,
+    teachers: 0,
   };
-
   announcements = [
-    { title: "Rentrée scolaire", date: "2024-12-15", message: "La rentrée scolaire commence le 15 décembre 2024." },
-    { title: "Nouveau cours disponible", date: "2024-12-20", message: "Un nouveau cours de programmation sera lancé." }
+    { title: 'Nouvelle année scolaire', date: '2024-01-01', message: 'Bienvenue à tous les étudiants.' },
+    { title: 'Mise à jour des cours', date: '2024-01-15', message: 'De nouveaux cours ont été ajoutés.' },
   ];
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Vérifier si l'utilisateur est un administrateur
+    this.isAdmin = this.authService.isAdmin();
+
+    // Charger les statistiques (vous pouvez remplacer par une API ou des données dynamiques)
+    this.stats = {
+      students: 150,
+      courses: 25,
+      teachers: 12,
+    };
+  }
 }

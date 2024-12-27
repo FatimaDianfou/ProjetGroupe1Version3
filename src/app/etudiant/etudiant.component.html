@@ -1,49 +1,93 @@
 <div class="container">
-    <h2>Gestion des Étudiants</h2>
+  <h2>Gestion des Étudiants</h2>
 
-    <!-- Formulaire -->
-    <form (ngSubmit)="ajouterOuModifierEtudiant()" #etudiantForm="ngForm">
-      <div>
-        <label>Nom :</label>
-        <input type="text" [(ngModel)]="etudiant.nom" name="nom" required #nom="ngModel" />
-        <div *ngIf="nom.invalid && nom.touched" class="error-message">
-          Le nom est requis.
-        </div>
-      </div>
-      <div>
-        <label>Prénom :</label>
-        <input type="text" [(ngModel)]="etudiant.prenom" name="prenom" required #prenom="ngModel" />
-        <div *ngIf="prenom.invalid && prenom.touched" class="error-message">
-          Le prénom est requis.
-        </div>
-      </div>
-      <div>
-        <label>Email :</label>
-        <input type="email" [(ngModel)]="etudiant.email" name="email" required email #email="ngModel" />
-        <div *ngIf="email.invalid && email.touched" class="error-message">
-          L'email est requis et doit être valide.
-        </div>
-      </div>
-      <div>
-        <label>Classe :</label>
-        <input type="text" [(ngModel)]="etudiant.classe" name="classe" required #classe="ngModel" />
-        <div *ngIf="classe.invalid && classe.touched" class="error-message">
-          La classe est requise.
-        </div>
-      </div>
+  <!-- Barre de recherche -->
+  <input
+    type="text"
+    placeholder="Rechercher un étudiant..."
+    [(ngModel)]="searchText"
+    class="search-bar"
+  />
 
-      <button type="submit" [disabled]="etudiantForm.invalid">
-        {{ isEditMode ? 'Modifier' : 'Ajouter' }}
-      </button>
-      <button type="button" (click)="reinitialiserFormulaire()">Réinitialiser</button>
-    </form>
+  <!-- Bouton pour ouvrir la popup -->
+  <button class="open-modal-btn" (click)="ouvrirPopup()">Ajouter un étudiant</button>
 
-    <!-- Liste des étudiants -->
-    <ul>
-      <li *ngFor="let etudiant of etudiants">
-        {{ etudiant.nom }} {{ etudiant.prenom }} - {{ etudiant.email }} ({{ etudiant.classe }})
-        <button (click)="modifierEtudiant(etudiant)">Modifier</button>
-        <button (click)="supprimerEtudiant(etudiant.id)">Supprimer</button>
-      </li>
-    </ul>
+  <!-- Popup pour le formulaire -->
+  <div class="modal" [class.show]="popupVisible">
+    <div class="modal-content">
+      <span class="close-btn" (click)="fermerPopup()">&times;</span>
+      <h3>{{ isEditMode ? 'Modifier un étudiant' : 'Ajouter un étudiant' }}</h3>
+
+      <form (ngSubmit)="ajouterOuModifierEtudiant()" #etudiantForm="ngForm">
+        <div>
+          <label>Nom :</label>
+          <input
+            type="text"
+            [(ngModel)]="etudiant.nom"
+            name="nom"
+            required
+            #nom="ngModel"
+          />
+          <div *ngIf="nom.invalid && nom.touched" class="error-message">
+            Le nom est requis.
+          </div>
+        </div>
+        <div>
+          <label>Prénom :</label>
+          <input
+            type="text"
+            [(ngModel)]="etudiant.prenom"
+            name="prenom"
+            required
+            #prenom="ngModel"
+          />
+          <div *ngIf="prenom.invalid && prenom.touched" class="error-message">
+            Le prénom est requis.
+          </div>
+        </div>
+        <div>
+          <label>Email :</label>
+          <input
+            type="email"
+            [(ngModel)]="etudiant.email"
+            name="email"
+            required
+            email
+            #email="ngModel"
+          />
+          <div *ngIf="email.invalid && email.touched" class="error-message">
+            L'email est requis et doit être valide.
+          </div>
+        </div>
+        <div>
+          <label>Classe :</label>
+          <input
+            type="text"
+            [(ngModel)]="etudiant.classe"
+            name="classe"
+            required
+            #classe="ngModel"
+          />
+          <div *ngIf="classe.invalid && classe.touched" class="error-message">
+            La classe est requise.
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="etudiantForm.invalid">
+          {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+        </button>
+        <button type="button" (click)="reinitialiserFormulaire()">Réinitialiser</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Liste des étudiants -->
+  <ul>
+    <li *ngFor="let etudiant of etudiantsFiltres" class="student-item">
+      {{ etudiant.nom }} {{ etudiant.prenom }} - {{ etudiant.email }} ({{ etudiant.classe }})
+      <button (click)="modifierEtudiant(etudiant)">Modifier</button>
+      <button (click)="supprimerEtudiant(etudiant.id)">Supprimer</button>
+    </li>
+    
+  </ul>
 </div>

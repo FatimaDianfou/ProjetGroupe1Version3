@@ -1,37 +1,130 @@
 <div class="container">
-  <div class="card shadow p-4">
-    <h2 class="text-center mb-4">Créer un compte</h2>
-    <form (ngSubmit)="register()" #registerForm="ngForm">
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="nom" class="form-label">Nom</label>
-          <input type="text" id="nom" name="nom" [(ngModel)]="nom" class="form-control" required />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="prenom" class="form-label">Prénom</label>
-          <input type="text" id="prenom" name="prenom" [(ngModel)]="prenom" class="form-control" required />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" id="email" name="email" [(ngModel)]="email" class="form-control" required />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="password" class="form-label">Mot de passe</label>
-          <input type="password" id="password" name="password" [(ngModel)]="password" class="form-control" required />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" class="form-control" required />
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid || confirmPassword !== password">S'inscrire</button>
-    </form>
-    <p class="text-center mt-3">Déjà un compte ? <a routerLink="/login" class="text-primary">Se connecter</a></p>
-    <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
-    <div *ngIf="successMessage" class="text-success">{{ successMessage }}</div>
+  <h2>Créer un compte</h2>
+  <form (ngSubmit)="createAccount()" #registerForm="ngForm" class="row g-3">
+    <!-- Nom et Prénom (sur la même ligne) -->
+    <div class="col-md-6">
+      <label for="nom" class="form-label">Nom</label>
+      <input
+        type="text"
+        id="nom"
+        name="nom"
+        [(ngModel)]="nom"
+        class="form-control"
+        required
+        minlength="2"
+        maxlength="50"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="prenom" class="form-label">Prénom</label>
+      <input
+        type="text"
+        id="prenom"
+        name="prenom"
+        [(ngModel)]="prenom"
+        class="form-control"
+        required
+        minlength="2"
+        maxlength="50"
+      />
+    </div>
+
+    <!-- Téléphone et Adresse (sur la même ligne) -->
+    <div class="col-md-6">
+      <label for="telephone" class="form-label">Numéro de téléphone</label>
+      <input
+        type="tel"
+        id="telephone"
+        name="telephone"
+        [(ngModel)]="telephone"
+        class="form-control"
+        required
+        pattern="[0-9]{8,15}"
+        title="Entrez un numéro valide (8 à 15 chiffres)"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="adresse" class="form-label">Adresse</label>
+      <input
+        type="text"
+        id="adresse"
+        name="adresse"
+        [(ngModel)]="adresse"
+        class="form-control"
+        required
+        maxlength="100"
+      />
+    </div>
+
+    <!-- Email -->
+    <div class="col-md-12">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        class="form-control"
+        required
+      />
+    </div>
+
+    <!-- Mot de passe -->
+    <div class="col-md-12">
+      <label for="password" class="form-label">Mot de passe</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        class="form-control"
+        required
+        minlength="8"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+        title="Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre, et un caractère spécial."
+      />
+    </div>
+
+    <!-- Rôle -->
+    <div class="col-md-12">
+      <label for="role" class="form-label">Rôle</label>
+      <select
+        id="role"
+        [(ngModel)]="role"
+        name="role"
+        class="form-select"
+        required
+      >
+        <option value="directeur">Directeur</option>
+        <option value="responsable">Responsable</option>
+      </select>
+    </div>
+
+    <!-- Bouton -->
+    <div class="col-md-12">
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="registerForm.invalid"
+      >
+        Créer le compte
+      </button>
+    </div>
+  </form>
+
+  <!-- Messages d'erreur et de succès -->
+  <div *ngIf="errorMessage" class="text-danger mt-3">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="text-success mt-3">
+    {{ successMessage }} Redirection vers la page de connexion...
   </div>
+  <input
+  type="password"
+  [(ngModel)]="password"
+  name="password"
+  class="form-control"
+  required
+  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+  title="Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre, et un caractère spécial."
+/>
+
 </div>

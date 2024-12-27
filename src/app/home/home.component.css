@@ -1,55 +1,157 @@
+/* Style global */
 .home-container {
-    padding: 20px;
-  }
-  
-  .banner {
-    text-align: center;
-    background-color: #509CDB;
-    color: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-  }
-  
-  .stats-section, .announcements-section, .links-section {
-    margin-bottom: 30px;
-  }
-  
+  padding: 20px;
+  background-color: #f4f4f9;
+  border-radius: 8px;
+  max-width: 1200px;
+  margin: 30px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Bannière d'accueil */
+.banner {
+  text-align: center;
+  background-color: #3f51b5;
+  color: white;
+  padding: 40px 0;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.banner h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.banner p {
+  font-size: 1.1rem;
+}
+
+/* Section des statistiques */
+.stats-section {
+  margin-bottom: 30px;
+}
+
+.stats h2 {
+  font-size: 1.8rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.stat-card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 30%;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+  font-size: 2rem;
+  color: #3f51b5;
+  margin-bottom: 8px;
+}
+
+.stat-card p {
+  font-size: 1rem;
+  color: #777;
+}
+
+/* Section des annonces */
+.announcements-section {
+  margin-bottom: 30px;
+}
+
+.announcements-section h2 {
+  font-size: 1.8rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.announcement-card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.announcement-card h3 {
+  font-size: 1.6rem;
+  color: #3f51b5;
+  margin-bottom: 8px;
+}
+
+.announcement-card small {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.announcement-card p {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Section des liens rapides */
+.links-section {
+  text-align: center;
+}
+
+.links h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.links .btn {
+  padding: 8px 18px;
+  border-radius: 25px;
+  background-color: #3f51b5;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.links .btn:hover {
+  background-color: #303f9f;
+  transform: translateY(-3px);
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
   .stats {
-    display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
   }
-  
+
   .stat-card {
-    text-align: center;
-    padding: 10px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    width: 30%;
-  }
-  
-  .announcement-card {
-    background-color: #e8f5e9;
-    padding: 15px;
+    width: 80%;
     margin-bottom: 15px;
-    border-radius: 10px;
   }
-  
+
   .links {
-    display: flex;
-    justify-content: space-around;
+    flex-direction: column;
   }
-  
-  .link-card {
-    text-align: center;
-    padding: 10px 20px;
-    background-color: #1d1d1b;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-  }
-  
-  .link-card:hover {
-    background-color: #333333;
-  }
-  
+}

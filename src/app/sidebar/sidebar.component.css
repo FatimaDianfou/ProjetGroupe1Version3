@@ -24,3 +24,10 @@
   background-color: #3498db; /* Bleu foncé au survol */
   border-radius: 5px; /* Arrondir les coins */
 }
+.sidebar {
+  display: block;
+}
+
+.nav-item {
+  display: block;
+}

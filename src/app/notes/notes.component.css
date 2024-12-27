@@ -1,0 +1,43 @@
+.container {
+    margin-top: 30px;
+  }
+  
+  .table {
+    margin-top: 20px;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  
+  button i {
+    margin-right: 5px;
+  }
+  
+  .modal-content {
+    padding: 20px;
+  }
+  
+  button.btn {
+    font-size: 14px;
+    padding: 5px 15px;
+  }
+  
+  input.form-control {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  input[type="number"] {
+    max-width: 80px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+  }
+  

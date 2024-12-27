@@ -1,35 +1,68 @@
+/* Styles pour les champs de formulaire */
 .form-control {
-    height: 30px;
-    font-size: 12px;
-    padding: 5px;
+  height: 40px; /* Augmenter la hauteur pour plus de confort */
+  font-size: 14px; /* Taille de police légèrement plus grande */
+  padding: 8px 10px; /* Espacement interne plus généreux */
+  border: 1px solid #ccc; /* Bordure légère pour un style moderne */
+  border-radius: 4px; /* Bordures arrondies pour un aspect élégant */
+}
+
+/* Styles pour les étiquettes */
+.form-label {
+  font-size: 12px; /* Taille de police plus lisible */
+  font-weight: bold; /* Mettre en évidence les étiquettes */
+  color: #333; /* Couleur de texte foncée pour la lisibilité */
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Grille flexible pour le formulaire */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Plus d'espace entre les colonnes */
+}
+
+.col-md-6 {
+  flex: 1 1 calc(50% - 15px); /* Deux colonnes sur les grands écrans */
+  min-width: 200px; /* Largeur minimale pour éviter que les champs ne se réduisent trop */
+}
+
+.col-md-3 {
+  flex: 1 1 calc(33.33% - 15px); /* Trois colonnes sur les grands écrans */
+  min-width: 150px;
+}
+
+/* Style pour les boutons */
+button {
+  font-size: 12px;
+  padding: 8px 12px; /* Espacement interne amélioré */
+  background-color: #007bff; /* Couleur bleue pour les boutons */
+  color: #fff; /* Texte blanc */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Couleur plus sombre au survol */
+}
+
+/* Carte pour afficher la liste des enseignants */
+.card {
+  max-width: 100%;
+  margin: 20px auto; /* Ajouter de l'espace autour de la carte */
+  padding: 20px;
+  background-color: #f9f9f9; /* Fond léger pour la carte */
+  border: 1px solid #ddd; /* Bordure légère */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+}
+
+/* Styles responsives */
+@media (max-width: 768px) {
+  .col-md-6, .col-md-3 {
+    flex: 1 1 100%; /* Une seule colonne sur les écrans petits */
   }
-  
-  .form-label {
-    font-size: 10px;
-  }
-  
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .col-md-6 {
-    flex: 1 1 calc(50% - 10px); /* Chaque champ occupe 50% avec un espace entre les colonnes */
-  }
-  
-  .col-md-3 {
-    flex: 1 1 calc(33.33% - 10px); /* Pour afficher 3 champs par ligne */
-  }
-  
-  button {
-    font-size: 10px;
-    padding: 5px 10px;
-  }
-  
-  .card {
-    max-width: 100%; /* Utilisez toute la largeur disponible */
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
+}

@@ -1,33 +1,33 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+successMessage: any;
+onForgotPassword() {
+throw new Error('Method not implemented.');
+}
   email: string = '';
   password: string = '';
   errorMessage: string = '';
-  successMessage: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    // Récupérer les informations depuis le localStorage
-    const storedEmail = localStorage.getItem('userEmail');
-    const storedPassword = localStorage.getItem('userPassword');
+    const result = this.authService.login(this.email, this.password);
 
-    if (this.email === storedEmail && this.password === storedPassword) {
-      this.successMessage = 'Connexion réussie !';
+    if (result.success) {
       this.errorMessage = '';
-
-      // Redirection vers la page d'accueil après la connexion
-      this.router.navigate(['/home']);
+      if (result.role === 'directeur' || result.role === 'responsable') {
+        this.router.navigate(['/home']); // Page d'accueil pour les directeurs/responsables
+      }
     } else {
-      this.errorMessage = 'Identifiants incorrects.';
-      this.successMessage = '';
+      this.errorMessage = 'Identifiants incorrects. Veuillez réessayer.';
     }
   }
 }
